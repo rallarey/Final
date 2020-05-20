@@ -321,14 +321,10 @@ public class LoanCalcViewController implements Initializable {
 
 		NumberFormat fmtCurrency = NumberFormat.getCurrencyInstance(Locale.US);
 		lblTotalPayemnts.setText(fmtCurrency.format(loanExtra.getTotalPayments()));
-		
 		lblMonthlyPayment.setText(fmtCurrency.format(loanExtra.getTotalInterest()));
-		// TODO: Set lblTotalInterest label with loanExtra's total interest payments
-		lblTotalInterest.setText(fmtCurrency.format(loanExtra.getTotalInterest()+loanExtra.getTotalInterest()));
-		// TODO: Set lblTotalInterest label with loanExtra's PMT
-		lblInterestSaved.setText(fmtCurrency.format(loanExtra.getTotalInterest()+loanExtra.getTotalInterest()));
-		// TODO: Set lblInterestSaved to the total interest saved
-
+		lblTotalInterest.setText(fmtCurrency.format(loanExtra.getTotalInterest()-loanExtra.getTotalInterest()));
+		lblInterestSaved.setText(fmtCurrency.format(loanExtra.getTotalInterest()-loanExtra.getTotalInterest()));
+	
 		lblPaymentsSaved
 				.setText(String.valueOf(loanNoExtra.getLoanPayments().size() - loanExtra.getLoanPayments().size()));
 
