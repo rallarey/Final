@@ -189,7 +189,7 @@ public class LoanCalcViewController implements Initializable {
 
 	@FXML
 	private void btnClearResultsKeyPress(KeyEvent event) {
-		// TODO: Call the method to clear the results
+		btnClearResults(null);
 	}
 
 	/**

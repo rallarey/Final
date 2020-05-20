@@ -44,19 +44,22 @@ public class Loan {
 
 	public double GetPMT() {
 		double PMT = 0;
-		//TODO: Execute PMT function to determine payment with given rate, nbr of payments, PV, FV, compounding)
+		PMT = Escrow + Math.abs(FinanceLib.pmt(InterestRate/12, LoanPaymentCnt, LoanAmount, ?, bCompoundingOption));
 		return PMT;
 	}
 
 	public double getTotalPayments() {
 		//TODO: Return the total payments for the loan
 		double tot = 0;
+		tot = GetPMT() ???
 		return tot;
 	}
 
 	public double getTotalInterest() {
-		//TODO: Return the total interest for the loan
 		double interest = 0;
+		for (Payment p: loanPayments) {
+			interest += p.getInterestPayment();
+		}
 		return interest;
 	}
 
