@@ -44,14 +44,13 @@ public class Loan {
 
 	public double GetPMT() {
 		double PMT = 0;
-		PMT = Escrow + Math.abs(FinanceLib.pmt(InterestRate/12, LoanPaymentCnt, LoanAmount, ?, bCompoundingOption));
+		PMT = Escrow + Math.abs(FinanceLib.pmt(InterestRate/12, LoanPaymentCnt, LoanAmount, 0, bCompoundingOption));
 		return PMT;
 	}
 
 	public double getTotalPayments() {
-		//TODO: Return the total payments for the loan
 		double tot = 0;
-		tot = GetPMT()*LoanPaymentCnt; // i don't know
+		tot = GetPMT()*LoanPaymentCnt;
 		return tot; 
 	}
 

@@ -211,10 +211,6 @@ public class LoanCalcViewController implements Initializable {
 	}
 
 	private boolean ValidateData() {
-		// TODO: Only show one alert message. If there are three errors,
-		// show one Alert with all three errors.
-		// Hint: Use StringBuilder for the 'setContentText' message.
-		
 		StringBuilder strb = new StringBuilder();
 		boolean bAlert = false;
 		
@@ -232,13 +228,13 @@ public class LoanCalcViewController implements Initializable {
 			
 		}
 		try {
-			if(InterestRate.getText().trim().isEmpty() || (!(Double.parseDouble(InterestRate.getText().trim())>1))) { // finish
+			if(InterestRate.getText().trim().isEmpty() || (!(Double.parseDouble(InterestRate.getText().trim())>1 && Double.parseDouble(InterestRate.getText().trim())<30))) {
 				strb.append("Valid interest rate is required. \n");
 				bAlert = true;
 			}
 		} 
 			catch(NumberFormatException e) {
-				strb.append("valid interest rate is required. \n");
+				strb.append("Valid interest rate is required. \n");
 				bAlert = true;
 			}
 		catch (Exception e) {
@@ -257,20 +253,39 @@ public class LoanCalcViewController implements Initializable {
 		catch (Exception e) {
 			
 		}
-		
-		
-		// Validate LoanAmount isn't empty
-		if (LoanAmount.getText().trim().isEmpty()) {
-			Alert fail = new Alert(AlertType.ERROR);
-			fail.setHeaderText("Missing Data");
-			fail.setContentText("Loan Amount is required");
-			fail.showAndWait();
-			return false;
+		try {
+			if(!(Double.parseDouble(AdditionalPayment.getText().trim())>=0)) {
+				strb.append("Valid additional payment is required. \n");
+				bAlert = true;
+			}
 		}
-
-		// TODO: Validate AdditionalPayment, if given, is a positive double
-		// TODO: Validate EscrowAmount, if given, is a positive double
-
+			catch(NumberFormatException e) {
+				strb.append("Valid additional payment is required. \n");
+				bAlert = true;
+			}
+		catch (Exception e) {
+			
+		}
+		try {
+			if(!(Double.parseDouble(EscrowAmount.getText().trim())>=0)) {
+				strb.append("Valid escrow amount is required. \n");
+				bAlert = true;
+			}
+		}
+			catch(NumberFormatException e) {
+				strb.append("Valid escrow amount is required. \n");
+				bAlert = true;
+		}
+		catch (Exception e) {
+			
+		}
+		if(bAlert) {
+			Alert fail = new Alert(AlertType.ERROR);
+					fail.setHeaderText("Validation error");
+					fail.setContentText(strb.toString());
+					fail.showAndWait();
+					return false;
+		}
 		return true;
 	}
 
