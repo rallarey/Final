@@ -3,6 +3,7 @@ package app.controller;
 import app.StudentCalc;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -203,16 +204,61 @@ public class LoanCalcViewController implements Initializable {
 
 		paymentList.clear();
 		hbChart.getChildren().clear();
-
-		// TODO: Clear all the output labels (lblTotalPayemnts, lblTotalInterest, etc)
 		lblTotalPayemnts.setText("");
+		lblTotalInterest.setText("");
+		lblMonthlyPayment.setText("");
+		lblPaymentsSaved.setText("");
 	}
 
 	private boolean ValidateData() {
 		// TODO: Only show one alert message. If there are three errors,
 		// show one Alert with all three errors.
 		// Hint: Use StringBuilder for the 'setContentText' message.
-
+		
+		StringBuilder strb = new StringBuilder();
+		boolean bAlert = false;
+		
+		try {
+			if (LoanAmount.getText().trim().isEmpty() || (!(Double.parseDouble(LoanAmount.getText().trim())>0))) {
+				strb.append("Loan amount must be a positive double. \n");
+				bAlert = true;
+			}
+		}
+			catch(NumberFormatException e) {
+				strb.append("Loan amount must be a positive double. \n");
+				bAlert = true;
+			}
+		catch (Exception e) {
+			
+		}
+		try {
+			if(InterestRate.getText().trim().isEmpty() || (!(Double.parseDouble(InterestRate.getText().trim())>1))) { // finish
+				strb.append("Valid interest rate is required. \n");
+				bAlert = true;
+			}
+		} 
+			catch(NumberFormatException e) {
+				strb.append("valid interest rate is required. \n");
+				bAlert = true;
+			}
+		catch (Exception e) {
+			
+		}
+		try {
+			if(NbrOfYears.getText().trim().isEmpty() || (!(Double.parseDouble(NbrOfYears.getText().trim())>0))) {
+				strb.append("Valid number of years is required. \n");
+				bAlert = true;
+			}
+		}
+			catch(NumberFormatException e) {
+				strb.append("Valid number of years is required. \n");
+				bAlert = true;
+			}
+		catch (Exception e) {
+			
+		}
+		
+		
 		// Validate LoanAmount isn't empty
 		if (LoanAmount.getText().trim().isEmpty()) {
 			Alert fail = new Alert(AlertType.ERROR);
@@ -222,10 +268,6 @@ public class LoanCalcViewController implements Initializable {
 			return false;
 		}
 
-		// TODO: Validate LoanAmount is a positive double
-		// TODO: Validate InterestRate is not blank and is a positive double. Validate
-		// that the value is between 1 and 30 (2.99 = 2.99%, not 0.0299)
-		// TODO: Validate NbrOfYears is a non blank positive integer
 		// TODO: Validate AdditionalPayment, if given, is a positive double
 		// TODO: Validate EscrowAmount, if given, is a positive double
 

@@ -51,8 +51,8 @@ public class Loan {
 	public double getTotalPayments() {
 		//TODO: Return the total payments for the loan
 		double tot = 0;
-		tot = GetPMT() ???
-		return tot;
+		tot = GetPMT()*LoanPaymentCnt; // i don't know
+		return tot; 
 	}
 
 	public double getTotalInterest() {
