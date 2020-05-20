@@ -130,7 +130,7 @@ public class LoanCalcViewController implements Initializable {
 
 		cmbLoanType.getItems().addAll("Home", "Auto", "School");
 
-		// TODO: Default cmbLoanType to select 'Home' as the default loan type
+		cmbLoanType.setValue("Home");
 
 		cmbLoanType.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -298,9 +298,8 @@ public class LoanCalcViewController implements Initializable {
 	@FXML
 	private void btnCalcLoan(ActionEvent event) {
 
-		// TODO: Call the method to Clear the Results
+		btnClearResults(event);
 
-		// Validate the data. If the method returns 'false', exit the method
 		if (ValidateData() == false)
 			return;
 
@@ -322,10 +321,12 @@ public class LoanCalcViewController implements Initializable {
 
 		NumberFormat fmtCurrency = NumberFormat.getCurrencyInstance(Locale.US);
 		lblTotalPayemnts.setText(fmtCurrency.format(loanExtra.getTotalPayments()));
+		
+		lblMonthlyPayment.setText(fmtCurrency.format(loanExtra.getTotalInterest()));
 		// TODO: Set lblTotalInterest label with loanExtra's total interest payments
-
+		lblTotalInterest.setText(fmtCurrency.format(loanExtra.getTotalInterest()+loanExtra.getTotalInterest()));
 		// TODO: Set lblTotalInterest label with loanExtra's PMT
-
+		lblInterestSaved.setText(fmtCurrency.format(loanExtra.getTotalInterest()+loanExtra.getTotalInterest()));
 		// TODO: Set lblInterestSaved to the total interest saved
 
 		lblPaymentsSaved
